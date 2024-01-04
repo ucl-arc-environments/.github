@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: actionlint
+        name: Lint GitHub Actions workflow
+        description: |
+          Runs actionlint to lint GitHub Actions workflow files.
+          See: https://github.com/rhysd/actionlint/tree/main
+        language: system
+        types: ["yaml"]
+        files: ^workflows/
+        pass_filenames: true
+        always_run: false
+        entry: actionlint
