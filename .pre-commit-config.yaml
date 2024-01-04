@@ -8,7 +8,7 @@ repos:
           See: https://github.com/rhysd/actionlint/tree/main
         language: system
         types: ["yaml"]
-        files: ^workflows/
+        files: ^.github/workflows/
         pass_filenames: true
         always_run: false
         entry: actionlint
