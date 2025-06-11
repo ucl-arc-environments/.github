@@ -16,6 +16,7 @@ on:
         required: false
         type: string
         description: Path containing Dockerfile to build. Defaults to repo root
+        default: "."
 
 # Required permissions:
 #   contents: read
@@ -49,7 +50,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.0.0
         with:
-          context: ${{ inputs.context != '' && inputs.context || '.' }}
+          context: ${{ inputs.context }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
