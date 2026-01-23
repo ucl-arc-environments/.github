@@ -1,29 +1,47 @@
 # linting
 
-This action can be used in the following manner:
+To use this action to find and update a README file for a specific Terraform
+module in a repository, it can be used in the following manner:
 
 ```yaml
 jobs:
   linting:
     runs-on: ubuntu-latest
     steps:
-      - uses: ucl-arc-environments/.github/actions/linting@vx
+      - uses: ucl-arc-environments/.github/actions/terraform-docs@vx
         with:
-          pre-commit-config: ./.pre-commit-config.yaml
+          working-dir: ./path/to/terraform/module
 ```
 
-where `x` is the `major` version of the action. If linting Terraform code that
-uses module sources from the Terraform Registry that require authentication, you
-can provide a Terraform token as follows (in this example, the token is stored
-in a GitHub secret named `TF_API_TOKEN`):
+To use this action to find and update README files for all Terraform modules in
+a repository, it can be used in the following manner:
 
 ```yaml
 jobs:
   linting:
     runs-on: ubuntu-latest
     steps:
-      - uses: ucl-arc-environments/.github/actions/linting@vx
+      - uses: ucl-arc-environments/.github/actions/terraform-docs@vx
         with:
-          pre-commit-config: ./.pre-commit-config.yaml
-          terraform-token: ${{ secrets.TF_API_TOKEN }}
+          find-dir: ./path/to/terraform/modules
 ```
+
+Don't use both `working-dir` and `find-dir` inputs at the same time.
+
+To use this action to find and update README files for all Terraform modules in
+a repository where there are other workflows which are required for status
+checks, it can be used in the following manner:
+
+```yaml
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ucl-arc-environments/.github/actions/terraform-docs@vx
+        with:
+          find-dir: ./path/to/terraform/modules
+          github-app-id: ${{ secrets.GITHUB_APP_ID }}
+          github-app-private-key: ${{ secrets.GITHUB_APP_PRIVATE_KEY }}
+```
+
+In the above 'x' is the `major` version of the action.
