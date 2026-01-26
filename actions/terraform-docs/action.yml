@@ -6,11 +6,11 @@ inputs:
   find-dir:
     description: The directory to start searching for Terraform modules
     required: false
-    default: '.'
+    default: ''
   working-dir:
     description: The working directory to run terraform-docs in
     required: false
-    default: '.'
+    default: ''
   recursive:
     description: Whether to search for Terraform modules recursively
     required: false
