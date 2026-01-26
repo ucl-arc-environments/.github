@@ -1,0 +1,49 @@
+---
+name: Linting
+description: Runs prek over the repo
+
+inputs:
+  pre-commit-config:
+    description: The pre-commit config file of the current repo
+    required: true
+
+  terraform-token:
+    description: Token to use for terraform registry access
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout source
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+
+    - name: Cache prek
+      uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5
+      with:
+        path: ~/.cache/prek
+        key: cache-${{ hashFiles(inputs.pre-commit-config) }}
+
+    - name: Set up uv
+      uses: astral-sh/setup-uv@06e4edb239928eb926db9fa84abd11632bf44baa # v7
+      with:
+        activate-environment: true
+        python-version: 3.14
+
+    - name: Set up terraform
+      uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+      if: inputs.terraform-token == ''
+
+    - name: Set up terraform
+      uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+      with:
+        cli_config_credentials_token: ${{ inputs.terraform-token }}
+      if: inputs.terraform-token != ''
+
+    - name: Install prek
+      shell: bash
+      run: uv pip install prek
+
+    - name: Run prek
+      shell: bash
+      run: uv run prek run --all-files --color always --verbose
