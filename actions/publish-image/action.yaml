@@ -6,11 +6,11 @@ inputs:
   context:
     required: false
     description: Path containing Dockerfile to build. Defaults to repo root
-    default: ${{ github.repository }}
+    default: '.'
   name:
     required: false
     description: Name of the image to push. Defaults to ucl-arc-environments/<repo-name>
-    default: ''
+    default: ${{ github.repository }}
   password:
     required: true
     description: Password to use for container registry login.
