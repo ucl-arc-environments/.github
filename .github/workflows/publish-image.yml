@@ -12,10 +12,14 @@ on:
         required: false
         type: string
         description: Docker image target. See https://docs.docker.com/build/building/multi-stage/
+      file:
+        required: false
+        type: string
+        description: Path to the Dockerfile. Defaults to "Dockerfile" at the context root
       context:
         required: false
         type: string
-        description: Path containing Dockerfile to build. Defaults to repo root
+        description: Path to set as the root context of the docker build. Defaults to repo root
         default: "."
 
 # Required permissions:
