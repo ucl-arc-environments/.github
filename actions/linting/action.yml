@@ -12,6 +12,11 @@ inputs:
     required: false
     default: ''
 
+  terraform-version:
+    description: Version of terraform to use for linting
+    required: false
+    default: latest
+
 runs:
   using: composite
   steps:
@@ -32,12 +37,15 @@ runs:
 
     - name: Set up terraform
       uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+      with:
+        terraform_version: ${{ inputs.terraform-version }}
       if: inputs.terraform-token == ''
 
     - name: Set up terraform
       uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
       with:
         cli_config_credentials_token: ${{ inputs.terraform-token }}
+        terraform_version: ${{ inputs.terraform-version }}
       if: inputs.terraform-token != ''
 
     - name: Install prek
