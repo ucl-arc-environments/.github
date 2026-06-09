@@ -7,6 +7,11 @@ inputs:
     description: The pre-commit config file of the current repo
     required: true
 
+  terraform-stack-dir:
+    description: The directory of the terraform stack to lint.
+    required: false
+    default: ''
+
   terraform-token:
     description: Token to use for terraform registry access
     required: false
@@ -47,6 +52,12 @@ runs:
         cli_config_credentials_token: ${{ inputs.terraform-token }}
         terraform_version: ${{ inputs.terraform-version }}
       if: inputs.terraform-token != ''
+
+    - name: Initialise the terraform stack
+      shell: bash
+      run: terraform stacks init
+      working-directory: ${{ inputs.terraform-stack-dir }}
+      if: inputs.terraform-stack-dir != ''
 
     - name: Install prek
       shell: bash
