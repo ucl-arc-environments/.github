@@ -27,3 +27,18 @@ jobs:
           pre-commit-config: ./.pre-commit-config.yaml
           terraform-token: ${{ secrets.TF_API_TOKEN }}
 ```
+
+If linting a Terraform stack rather than a module or workspace, it will need to
+be initialised:
+
+```yaml
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ucl-arc-environments/.github/actions/linting@vx
+        with:
+          pre-commit-config: ./.pre-commit-config.yaml
+          terraform-stack-dir: /path/to/stack
+          terraform-token: ${{ secrets.TF_API_TOKEN }}
+```
