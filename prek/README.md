@@ -33,6 +33,16 @@ One can then add, for example, `# typos: ignore` on a given line, or `# typos:
 ignore-next-line` on a preceeding line. Note that this should work with any
 style of comment.
 
+## Terraform Stacks hooks
+
+Hooks are included in this repository for formatting and validating Terraform
+Stacks. These are not included in the default hook config due to any potential
+errors that may be triggered by calling the default hooks in repositories that
+contain standard Terraform modules/workspaces (which also use
+`.terraform.lock.hcl` files to track dependencies). Additionally, the
+`terraform-stacks-validate` hook takes a long time to run due to having to
+initialise and update the lock file before validation can run.
+
 ## Acknowledgements
 
 Follows, and is very much indebited to, the approach taken by [Paddy
