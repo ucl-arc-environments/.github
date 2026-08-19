@@ -13,22 +13,6 @@ repos:
 
 Then run `prek install; prek autoupdate`.
 
-## Maintainer note on local hooks
-
-`terraform-stacks-validate` is executed from `prek/environments-hooks.yaml`, which is
-run in downstream repositories via `run-environments-hooks.py`.
-
-Because nested `repo: local` hooks resolve paths from the downstream working
-directory, the hook command must not rely on a relative path like
-`prek/hooks/...`.
-
-`run-environments-hooks.py` sets `ENVIRONMENTS_HOOKS_DIR` to this repo's
-`prek/` directory, and the hook invokes:
-
-`"${ENVIRONMENTS_HOOKS_DIR}/hooks/terraform-stacks-validate.sh"`
-
-This ensures the script is found reliably when consumed from other repositories.
-
 ## Spellchecking
 
 If a repository is experiencing spellchecking problems caused by
