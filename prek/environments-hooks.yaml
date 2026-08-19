@@ -5,7 +5,7 @@ repos:
       - id: terraform-stacks-validate
         name: Terraform stacks validate
         description: Validates all Terraform stacks configuration files
-        entry: ../hooks/terraform-stacks-validate.sh
+        entry: prek/hooks/terraform-stacks-validate.sh
         files: \.hcl$
         language: script
         exclude: \.terraform\/.*$
