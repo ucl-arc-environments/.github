@@ -5,9 +5,13 @@ repos:
       - id: terraform-stacks-validate
         name: Terraform stacks validate
         description: Validates all Terraform stacks configuration files
-        entry: prek/hooks/terraform-stacks-validate.sh
+        entry: bash
+        args:
+          - -c
+          - "\"${ENVIRONMENTS_HOOKS_DIR}/hooks/terraform-stacks-validate.sh\" \"$@\""
+          - bash
         files: \.hcl$
-        language: script
+        language: system
         exclude: \.terraform\/.*$
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
