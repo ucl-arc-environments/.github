@@ -1,0 +1,9 @@
+---
+- id: terraform-stacks-validate
+  name: Terraform stacks validate
+  description: Validates all Terraform stacks configuration files
+  entry: prek/hooks/terraform-stacks-validate.sh
+  language: script
+  files: \.hcl$
+  exclude: \.terraform\/.*$
+  require_serial: true
