@@ -6,6 +6,14 @@
   language: script
   require_serial: true
   verbose: true
+- id: terraform-stacks-fmt
+  name: Terraform stacks fmt
+  description: Formats all Terraform stacks configuration files
+  entry: prek/hooks/terraform-stacks-fmt.sh
+  language: script
+  files: \.hcl$
+  exclude: \.terraform\/.*$
+  require_serial: true
 - id: terraform-stacks-validate
   name: Terraform stacks validate
   description: Validates all Terraform stacks configuration files
