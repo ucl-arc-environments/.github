@@ -7,6 +7,7 @@ repos:
         description: Validates all Terraform stacks configuration files
         entry: ../hooks/terraform-stacks-validate.sh
         files: \.hcl$
+        language: script
         exclude: \.terraform\/.*$
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.1
