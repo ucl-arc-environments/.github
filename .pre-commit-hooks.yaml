@@ -2,7 +2,7 @@
 - id: environments-hooks
   name: Environments hooks
   description: Default pre-commit hooks for Environments repos
-  entry: ./pre-commit/run-environments-hooks.py
+  entry: ./prek/run-environments-hooks.py
   language: script
   require_serial: true
   verbose: true
