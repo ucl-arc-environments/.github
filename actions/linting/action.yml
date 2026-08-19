@@ -26,28 +26,28 @@ runs:
   using: composite
   steps:
     - name: Checkout source
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
     - name: Cache prek
-      uses: actions/cache@8b402f58fbc84540c8b491a91e594a4576fec3d7 # v5
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
       with:
         path: ~/.cache/prek
         key: cache-${{ hashFiles(inputs.pre-commit-config) }}
 
     - name: Set up uv
-      uses: astral-sh/setup-uv@06e4edb239928eb926db9fa84abd11632bf44baa # v7
+      uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78 # v7
       with:
         activate-environment: true
         python-version: 3.14
 
     - name: Set up terraform
-      uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+      uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4
       with:
         terraform_version: ${{ inputs.terraform-version }}
       if: inputs.terraform-token == ''
 
     - name: Set up terraform
-      uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
+      uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4
       with:
         cli_config_credentials_token: ${{ inputs.terraform-token }}
         terraform_version: ${{ inputs.terraform-version }}
@@ -55,7 +55,25 @@ runs:
 
     - name: Initialise the terraform stack
       shell: bash
-      run: terraform stacks init
+      run: terraform stacks init -upgrade
+      working-directory: ${{ inputs.terraform-stack-dir }}
+      if: inputs.terraform-stack-dir != ''
+
+    - name: Update providers
+      shell: bash
+      run: terraform stacks providers-lock -platform=darwin_amd64 -platform=linux_amd64
+      working-directory: ${{ inputs.terraform-stack-dir }}
+      if: inputs.terraform-stack-dir != ''
+
+    - name: Format terraform stack
+      shell: bash
+      run: terraform stacks fmt -check
+      working-directory: ${{ inputs.terraform-stack-dir }}
+      if: inputs.terraform-stack-dir != ''
+
+    - name: Validate terraform stack
+      shell: bash
+      run: terraform stacks validate
       working-directory: ${{ inputs.terraform-stack-dir }}
       if: inputs.terraform-stack-dir != ''
 
