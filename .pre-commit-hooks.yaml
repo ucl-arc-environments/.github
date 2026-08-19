@@ -1,9 +1,8 @@
 ---
-- id: terraform-stacks-validate
-  name: Terraform stacks validate
-  description: Validates all Terraform stacks configuration files
-  entry: prek/hooks/terraform-stacks-validate.sh
+- id: environments-hooks
+  name: Environments hooks
+  description: Default pre-commit hooks for Environments repos
+  entry: ./pre-commit/run-environments-hooks.py
   language: script
-  files: \.hcl$
-  exclude: \.terraform\/.*$
   require_serial: true
+  verbose: true
