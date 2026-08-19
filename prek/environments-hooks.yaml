@@ -8,8 +8,9 @@ repos:
         entry: bash
         args:
           - -c
-          - "\"${ENVIRONMENTS_HOOKS_DIR}/hooks/terraform-stacks-validate.sh\" \"$@\""
-          - bash
+          - >-
+            bash "${ENVIRONMENTS_HOOKS_DIR}/hooks/terraform-stacks-validate.sh" "$@"
+          - _
         files: \.hcl$
         language: system
         exclude: \.terraform\/.*$
