@@ -11,6 +11,11 @@ inputs:
     description: Application private key
     required: true
 
+  terraform-stack-dir:
+    description: The directory of the terraform stack to lint.
+    required: false
+    default: ''
+
 runs:
   using: composite
   steps:
@@ -44,6 +49,19 @@ runs:
             -platform=darwin_amd64 \
             -platform=linux_amd64
         done
+      if: inputs.terraform-stack-dir == ''
+
+    - name: Update stack lock file for all platforms
+      shell: bash
+      run: |-
+        dir="${{ inputs.terraform-stack-dir }}"
+        echo "Initialising stack in $dir"
+        terraform stacks -chdir="$dir" init -upgrade
+        echo "Locking stack providers"
+        terraform stacks -chdir="$dir" providers-lock \
+          -platform=darwin_amd64 \
+          -platform=linux_amd64
+      if: inputs.terraform-stack-dir != ''
 
     - name: Commit updated lock files
       uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
