@@ -14,6 +14,9 @@ for dir in $(echo "$@" | xargs -n1 dirname | sort -u | uniq); do
   echo "--> Running 'terraform stacks validate' in directory '$dir'"
   pushd "$dir" >/dev/null
   terraform stacks init -upgrade || VALIDATE_ERROR=$?
+  terraform stacks providers-lock \
+    -platform=darwin_amd64 \
+    -platform=linux_amd64 || VALIDATE_ERROR=$?
   terraform stacks validate || VALIDATE_ERROR=$?
   popd >/dev/null
 done
