@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+import pathlib
+import subprocess
+import sys
+
+HERE = pathlib.Path(__file__).resolve()
+
+
+def main() -> int:
+    cfg = HERE.parent / "environments-hooks.yaml"
+    result = subprocess.run(
+        [
+            "prek",
+            "run",
+            "--config",
+            f"{cfg}",
+            "--files",
+        ]
+        + sys.argv[1:],
+        check=False,
+    )
+    return result.returncode
+
+
+if __name__ == "__main__":
+    exit(main())
