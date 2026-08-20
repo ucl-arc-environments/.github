@@ -1,0 +1,71 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "config:best-practices",
+    "schedule:monthly",
+    ":automergeBranch",
+    ":disableDependencyDashboard",
+    ":enablePreCommit",
+    ":label(renovate)",
+    ":prHourlyLimitNone",
+    ":prNotPending",
+    ":assignAndReview(team:arc-environments)",
+    "group:allDigest",
+    "group:allNonMajor",
+  ],
+  "commitMessageAction": "Renovate:",
+  "minimumReleaseAge": "7 days",
+  packageRules: [
+    {
+      "description": "Automatically merge, minor and patch-level updates",
+      "automerge": true,
+      "matchManagers": [
+        "dockerfile",
+        "github-actions",
+        "pre-commit",
+        "terraform"
+      ],
+      "matchUpdateTypes": ["digest", "minor", "patch"]
+    },
+    {
+      "description": "Shorten commit titles",
+      "commitMessageTopic": "{{depName}}",
+      "matchManagers": ["github-actions", "pre-commit"]
+    },
+    {
+      "description": "Combine action artefact updates together",
+      "groupName": "artefacts",
+      "matchDepNames": [
+        "actions/deploy-pages",
+        "actions/download-artifact",
+        "actions/upload-artifact",
+        "actions/upload-pages-artifact"
+      ]
+    },
+    {
+      "description": "Only allow major updates",
+      "enabled": false,
+      "matchDepNames": ["renovatebot/pre-commit-hooks"],
+      "matchUpdateTypes": ["minor", "patch", "pin"]
+    },
+    {
+      "description": "Support loose versioning",
+      "matchDepNames": [
+        "shellcheck-py/shellcheck-py"
+      ],
+      "versioning": "loose"
+    },
+    {
+      description: "Disable minimum release age checks for own GitHub Actions",
+      matchManagers: ["github-actions"],
+      matchPackageNames: ["ucl-arc-environments/*"],
+      minimumReleaseAge: null,
+    },
+    {
+      description: "Disable minimum release age checks for own pre-commit hooks",
+      matchManagers: ["pre-commit"],
+      matchPackageNames: ["ucl-arc-environments/*"],
+      minimumReleaseAge: null,
+    },
+  ],
+}
