@@ -7,6 +7,11 @@ inputs:
     description: The pre-commit config file of the current repo
     required: true
 
+  terraform-stack-dir:
+    description: The directory of the terraform stack to lint
+    required: false
+    default: ''
+
   terraform-token:
     description: Token to use for terraform registry access
     required: false
