@@ -48,6 +48,16 @@ runs:
         terraform_version: ${{ inputs.terraform-version }}
       if: inputs.terraform-token != ''
 
+    - name: Initialise terraform stack
+      shell: bash
+      run: |-
+        terraform stacks init -upgrade && \
+        terraform stacks providers-lock \
+        -platform=darwin_amd64 \
+        -platform=linux_amd64
+      working-directory: ${{ inputs.terraform-stack-dir }}
+      if: inputs.terraform-stack-dir != ''
+
     - name: Install prek
       shell: bash
       run: uv pip install prek
