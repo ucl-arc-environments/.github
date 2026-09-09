@@ -27,7 +27,7 @@ on:
         description:
           Path to set as the root context of the docker build. Defaults to repo
           root
-        default: "."
+        default: .
 
 # Required permissions:
 #   contents: read

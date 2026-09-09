@@ -6,7 +6,7 @@ inputs:
   context:
     required: false
     description: Path containing Dockerfile to build. Defaults to repo root
-    default: "."
+    default: .
   name:
     required: false
     description:
