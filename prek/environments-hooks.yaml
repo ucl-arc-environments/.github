@@ -152,7 +152,8 @@ repos:
     rev: v2.13.2
     hooks:
       - id: golangci-lint
-        args: ["--timeout=5m"]
+        args:
+          - --timeout=5m
       - id: golangci-lint-fmt
   - repo: https://github.com/tekwizely/pre-commit-golang
     rev: v1.0.0-rc.4
@@ -163,9 +164,7 @@ repos:
     hooks:
       - id: detect-secrets
         args:
-          [
-            "--baseline",
-            ".secrets.baseline",
-            "--exclude-secrets",
-            "__CHANGE_ME__",
-          ]
+          - --baseline
+          - .secrets.baseline
+          - --exclude-secrets
+          - __CHANGE_ME__
