@@ -6,23 +6,23 @@ inputs:
   find-dir:
     description: The directory to start searching for Terraform modules
     required: false
-    default: ''
+    default: ""
   working-dir:
     description: The working directory to run terraform-docs in
     required: false
-    default: ''
+    default: ""
   recursive:
     description: Whether to search for Terraform modules recursively
     required: false
-    default: 'false'
+    default: "false"
   github-app-id:
     description: The GitHub App ID for authentication
     required: false
-    default: ''
+    default: ""
   github-app-private-key:
     description: The GitHub App private key for authentication
     required: false
-    default: ''
+    default: ""
 
 runs:
   using: composite
