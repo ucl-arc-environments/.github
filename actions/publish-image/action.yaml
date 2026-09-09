@@ -6,10 +6,11 @@ inputs:
   context:
     required: false
     description: Path containing Dockerfile to build. Defaults to repo root
-    default: '.'
+    default: .
   name:
     required: false
-    description: Name of the image to push. Defaults to ucl-arc-environments/<repo-name>
+    description:
+      Name of the image to push. Defaults to ucl-arc-environments/<repo-name>
     default: ${{ github.repository }}
   password:
     required: true
@@ -20,8 +21,10 @@ inputs:
     default: ghcr.io
   target:
     required: false
-    description: Docker image target. See https://docs.docker.com/build/building/multi-stage/
-    default: ''
+    description:
+      Docker image target. See
+      https://docs.docker.com/build/building/multi-stage/
+    default: ""
 
 runs:
   using: composite

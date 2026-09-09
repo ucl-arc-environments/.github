@@ -33,4 +33,3 @@ jobs:
 ```
 
 In these examples, `x` is the `major` version of the action.
-

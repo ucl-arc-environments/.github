@@ -14,7 +14,7 @@ inputs:
   terraform-token:
     description: Token to use for terraform registry access
     required: false
-    default: ''
+    default: ""
 
   terraform-version:
     description: Version of terraform to use for linting
@@ -24,7 +24,7 @@ inputs:
   terraform-stack-dir:
     description: The directory of the terraform stack to lint.
     required: false
-    default: ''
+    default: ""
 
 runs:
   using: composite

@@ -7,20 +7,27 @@ on:
       name:
         required: false
         type: string
-        description: Name of the image to push. Defaults to ucl-arc-environments/<repo-name>
+        description:
+          Name of the image to push. Defaults to
+          ucl-arc-environments/<repo-name>
       target:
         required: false
         type: string
-        description: Docker image target. See https://docs.docker.com/build/building/multi-stage/
+        description:
+          Docker image target. See
+          https://docs.docker.com/build/building/multi-stage/
       file:
         required: false
         type: string
-        description: Path to the Dockerfile. Defaults to "Dockerfile" at the context root
+        description:
+          Path to the Dockerfile. Defaults to "Dockerfile" at the context root
       context:
         required: false
         type: string
-        description: Path to set as the root context of the docker build. Defaults to repo root
-        default: "."
+        description:
+          Path to set as the root context of the docker build. Defaults to repo
+          root
+        default: .
 
 # Required permissions:
 #   contents: read
@@ -52,7 +59,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.0.0
         with:
-          images: ${{ env.REGISTRY }}/${{ inputs.name != '' && inputs.name || env.DEFAULT_IMAGE_NAME }}
+          images:
+            ${{ env.REGISTRY }}/${{ inputs.name != '' && inputs.name ||
+            env.DEFAULT_IMAGE_NAME }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.0.0

@@ -29,9 +29,9 @@ extend-ignore-re = [
 ]
 ```
 
-One can then add, for example, `# typos: ignore` on a given line, or `# typos:
-ignore-next-line` on a preceeding line. Note that this should work with any
-style of comment.
+One can then add, for example, `# typos: ignore` on a given line, or
+`# typos: ignore-next-line` on a preceding line. Note that this should work with
+any style of comment.
 
 ## Terraform Stacks hooks
 
@@ -45,6 +45,6 @@ initialise and update the lock file before validation can run.
 
 ## Acknowledgements
 
-Follows, and is very much indebited to, the approach taken by [Paddy
-Roddy](https://github.com/paddyroddy) in the [UCL-MIRSG Github
-org](https://github.com/UCL-MIRSG/.github/blob/main/prek/README.md).
+Follows, and is very much indebited to, the approach taken by
+[Paddy Roddy](https://github.com/paddyroddy) in the
+[UCL-MIRSG Github org](https://github.com/UCL-MIRSG/.github/blob/main/prek/README.md).

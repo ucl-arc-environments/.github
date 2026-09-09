@@ -13,47 +13,45 @@
     "group:allDigest",
     "group:allNonMajor",
   ],
-  "commitMessageAction": "Renovate:",
-  "minimumReleaseAge": "7 days",
+  commitMessageAction: "Renovate:",
+  minimumReleaseAge: "7 days",
   packageRules: [
     {
-      "description": "Automatically merge, minor and patch-level updates",
-      "automerge": true,
-      "matchManagers": [
+      description: "Automatically merge, minor and patch-level updates",
+      automerge: true,
+      matchManagers: [
         "dockerfile",
         "github-actions",
         "pre-commit",
-        "terraform"
+        "terraform",
       ],
-      "matchUpdateTypes": ["digest", "minor", "patch"]
+      matchUpdateTypes: ["digest", "minor", "patch"],
     },
     {
-      "description": "Shorten commit titles",
-      "commitMessageTopic": "{{depName}}",
-      "matchManagers": ["github-actions", "pre-commit"]
+      description: "Shorten commit titles",
+      commitMessageTopic: "{{depName}}",
+      matchManagers: ["github-actions", "pre-commit"],
     },
     {
-      "description": "Combine action artefact updates together",
-      "groupName": "artefacts",
-      "matchDepNames": [
+      description: "Combine action artefact updates together",
+      groupName: "artefacts",
+      matchDepNames: [
         "actions/deploy-pages",
         "actions/download-artifact",
         "actions/upload-artifact",
-        "actions/upload-pages-artifact"
-      ]
-    },
-    {
-      "description": "Only allow major updates",
-      "enabled": false,
-      "matchDepNames": ["renovatebot/pre-commit-hooks"],
-      "matchUpdateTypes": ["minor", "patch", "pin"]
-    },
-    {
-      "description": "Support loose versioning",
-      "matchDepNames": [
-        "shellcheck-py/shellcheck-py"
+        "actions/upload-pages-artifact",
       ],
-      "versioning": "loose"
+    },
+    {
+      description: "Only allow major updates",
+      enabled: false,
+      matchDepNames: ["renovatebot/pre-commit-hooks"],
+      matchUpdateTypes: ["minor", "patch", "pin"],
+    },
+    {
+      description: "Support loose versioning",
+      matchDepNames: ["shellcheck-py/shellcheck-py"],
+      versioning: "loose",
     },
     {
       description: "Disable minimum release age checks for own GitHub Actions",

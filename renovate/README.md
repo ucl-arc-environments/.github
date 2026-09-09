@@ -8,7 +8,9 @@ To enable `Renovate` in a given repository, install and enable the
 ```json5
 {
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
-  extends: ["github>ucl-arc-environments/.github//renovate/default-config.json5"],
+  extends: [
+    "github>ucl-arc-environments/.github//renovate/default-config.json5",
+  ],
 }
 ```
 
@@ -155,6 +157,6 @@ The second one requires pull requests with at least `1` reviewer, but the
 
 ## Acknowledgements
 
-Follows, and is very much indebited to, the approach taken by [Paddy
-Roddy](https://github.com/paddyroddy) in the [UCL-MIRSG Github
-org](https://github.com/UCL-MIRSG/.github/blob/main/renovate/README.md).
+Follows, and is very much indebited to, the approach taken by
+[Paddy Roddy](https://github.com/paddyroddy) in the
+[UCL-MIRSG Github org](https://github.com/UCL-MIRSG/.github/blob/main/renovate/README.md).
