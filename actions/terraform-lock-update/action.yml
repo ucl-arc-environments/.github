@@ -67,6 +67,7 @@ runs:
           echo "Locking providers in $dir"
           terraform -chdir="$dir" providers lock \
             -platform=darwin_amd64 \
+            -platform=darwin_arm64 \
             -platform=linux_amd64
         done
       if: inputs.terraform-stack-dir == ''
@@ -80,6 +81,7 @@ runs:
         echo "Locking stack providers"
         terraform stacks -chdir="$dir" providers-lock \
           -platform=darwin_amd64 \
+          -platform=darwin_arm64 \
           -platform=linux_amd64
       if: inputs.terraform-stack-dir != ''
 
