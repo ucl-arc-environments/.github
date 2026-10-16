@@ -3,6 +3,10 @@ name: Linting
 description: Runs prek over the repo
 
 inputs:
+  ansible-requirements-file:
+    description: The ansible requirements file
+    default: missing
+
   pre-commit-config:
     description: The pre-commit config file of the current repo
     required: true
@@ -62,6 +66,13 @@ runs:
         -platform=linux_amd64
       working-directory: ${{ inputs.terraform-stack-dir }}
       if: inputs.terraform-stack-dir != ''
+
+    - name: Install ansible dependencies
+      shell: bash
+      run: >-
+        uv pip install ansible && uv run ansible-galaxy install -r ${{
+        inputs.ansible-requirements-file }} --force
+      if: inputs.ansible-requirements-file != 'missing'
 
     - name: Install prek
       shell: bash
