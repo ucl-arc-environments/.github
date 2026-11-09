@@ -2,7 +2,6 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
     "config:best-practices",
-    "schedule:monthly",
     ":automergeBranch",
     ":disableDependencyDashboard",
     ":enablePreCommit",
@@ -13,6 +12,7 @@
     "group:allDigest",
     "group:allNonMajor",
   ],
+  schedule: ["* * 1-3 * *"], // first 3 days of the month
   commitMessageAction: "Renovate:",
   minimumReleaseAge: "7 days",
   packageRules: [
